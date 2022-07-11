@@ -19,9 +19,9 @@ const userSchema = new mongoose.Schema({
     type:String,
     level:String,
     name:String,
-    skill:String,
-    photo:String,
-    profession:String
+    profilepic:String,
+    profession:String,
+    skill:String, 
 })
 
 //collection

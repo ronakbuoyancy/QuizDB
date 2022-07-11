@@ -30,12 +30,31 @@ app.get("/user", async(req, res) => {
     }
 })
 
-app.post("/user", async (req, res) => {
+app.post("/userlogin", async(req, res) => {
+    try {
+        const result = await Userdata.find(req.body)
+        console.log(result)
+        if(result == ''){
+            res.status(201);
+            res.send("Login Failed")
+        }else{
+            res.status(201);
+            res.send("Login Success")
+        }
+    }
+    catch (err) {
+        console.log(err)
+        res.status(400);
+        res.send(err)
+    }
+})
+
+app.post("/usersignup", async (req, res) => {
     try {
         console.log(req.body);
         const reactUserdata = new Userdata(req.body);
         const createUser = await reactUserdata.save()
-        res.status(201).send(createUser);
+        res.status(201).send("User is Created");
     }
 
     catch (e) {
