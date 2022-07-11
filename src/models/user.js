@@ -18,8 +18,10 @@ const userSchema = new mongoose.Schema({
     password:String,
     type:String,
     level:String,
-    name:String
-
+    name:String,
+    skill:String,
+    photo:String,
+    profession:String
 })
 
 //collection

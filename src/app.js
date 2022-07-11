@@ -43,6 +43,35 @@ app.post("/user", async (req, res) => {
     }
 })
 
+app.patch("/userupdate/:id", async (req, res) => {
+    try {
+        const _id = req.params.id;
+        console.log("id", _id)
+        const updateUserdata = await Userdata.findByIdAndUpdate({_id}, req.body,{
+            new:true
+        });
+        console.log(updateUserdata)
+        res.status(201).send("Userdata Updated Succesfully");
+    }
+
+    catch (e) {
+        res.status(400).send(e)
+    }
+})
+app.delete("/userdelete/:id", async (req, res) => {
+    try {
+        const _id = req.params.id;
+        console.log("id", _id)
+        const deleteUser = await Userdata.findByIdAndDelete({_id});
+        console.log(deleteUser)
+        res.status(201).send("Userdata Deleted...!");
+    }
+
+    catch (e) {
+        res.status(400).send(e)
+    }
+})
+
 //quiz api
 app.get("/quiz", async(req, res) => {
     try {
@@ -71,6 +100,7 @@ app.post("/getquestion", async (req, res) => {
         res.send(err)
     }
 })
+
 app.post("/addquestion", async (req, res) => {
     try {
         console.log(req.body);
@@ -86,6 +116,26 @@ app.post("/addquestion", async (req, res) => {
         res.send(err)
     }
 })
+
+app.patch("/updatequestion/:id", async (req, res) => {
+    try {
+        const _id = req.params.id;
+        console.log("id", _id)
+        const updateQuestion = await Quizdata.findByIdAndUpdate(_id, req.body,{
+            new:true
+        });
+        console.log(updateQuestion)
+        res.status(201).send("Question Updated Succesfully");
+    }
+
+    catch (err) {
+        console.log(err)
+        res.status(400);
+        res.send(err)
+    }
+})
+
+//score api
 app.post("/getscore", async (req, res) => {
     try {
         console.log(req.body);
@@ -115,6 +165,8 @@ app.post("/savescore", async (req, res) => {
         res.send(err)
     }
 })
+
+//subject api
 app.get("/getsubject", async(req, res) => {
     try {
         const result = await Subject.find()
@@ -122,6 +174,38 @@ app.get("/getsubject", async(req, res) => {
         res.status(201);
         res.send(result)
     }
+    catch (err) {
+        console.log(err)
+        res.status(400);
+        res.send(err)
+    }
+})
+app.post("/savesubject", async (req, res) => {
+    try {
+        console.log(req.body);
+        const new_subject = new Subject(req.body);
+        const subject = await new_subject.save()
+        res.status(201);
+        res.send("Subject Added Successfully")
+    }
+
+    catch (err) {
+        console.log(err)
+        res.status(400);
+        res.send(err)
+    }
+})
+app.patch("/updatesubject/:id", async (req, res) => {
+    try {
+        const _id = req.params.id;
+        console.log("id", _id)
+        const updateSubject = await Subject.findByIdAndUpdate(_id, req.body,{
+            new:true
+        });
+        console.log(updateSubject)
+        res.status(201).send("Subject Updated Succesfully");
+    }
+
     catch (err) {
         console.log(err)
         res.status(400);
