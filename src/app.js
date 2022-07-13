@@ -87,7 +87,7 @@ app.post("/usersignup", async (req, res) => {
     }
 })
 
-app.patch("/userupdate/:id", async (req, res) => {
+app.put("/userupdate/:id", async (req, res) => {
     try {
         const _id = req.params.id
         console.log("id", _id)
@@ -144,6 +144,28 @@ app.post("/getquestion", async (req, res) => {
         res.send(err)
     }
 })
+app.get("/getquestion/:id", async (req, res) => {
+    try {
+        const _id = req.params.id
+        const result = await Quizdata.findById({ _id });
+        res.status(201);
+        res.send({
+            question: result.question,
+            optiona: result.optiona,
+            optionb: result.optionb,
+            optionc: result.optionc,
+            optiond: result.optiond,
+            answer: result.answer,
+            message: "Data Fetched"
+        })
+    }
+
+    catch (err) {
+        console.log(err)
+        res.status(400);
+        res.send(err)
+    }
+})
 
 app.post("/addquestion", async (req, res) => {
     try {
@@ -161,7 +183,7 @@ app.post("/addquestion", async (req, res) => {
     }
 })
 
-app.patch("/updatequestion/:id", async (req, res) => {
+app.put("/updatequestion/:id", async (req, res) => {
     try {
         const _id = req.params.id;
         console.log("id", _id)
@@ -239,7 +261,26 @@ app.post("/savesubject", async (req, res) => {
         res.send(err)
     }
 })
-app.patch("/updatesubject/:id", async (req, res) => {
+app.get("/getsubject/:id", async (req, res) => {
+    try {
+        const _id = req.params.id;
+        const result = await Subject.findById({ _id })
+        console.log(result)
+        res.status(201);
+        res.send({
+            subjectid: result.subjectid,
+            subjectname: result.subjectname,
+            description: result.description,
+            category: result.category,
+        })
+    }
+    catch (err) {
+        console.log(err)
+        res.status(400);
+        res.send(err)
+    }
+})
+app.put("/updatesubject/:id", async (req, res) => {
     try {
         const _id = req.params.id;
         console.log("id", _id)
