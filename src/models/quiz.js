@@ -2,10 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 
 const quizSchema = new mongoose.Schema({
-    subject: {
-        type: String,
-        required: true
-    },
+    subject: String,
     qid: Number,
     question: {
         type: String,
