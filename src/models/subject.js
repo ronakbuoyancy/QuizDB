@@ -3,10 +3,14 @@ const validator = require("validator");
 
 const subjectSchema = new mongoose.Schema({
 
-    subjectid:String,
-    subjectname:String,
-    description:String,
-    category:String,
+    subjectid: String,
+    subjectname: {
+        type: String,
+        required: true,
+        unique : true
+    },
+    description: String,
+    category: String,
 
 })
 
