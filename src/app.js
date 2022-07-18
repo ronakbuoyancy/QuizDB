@@ -77,9 +77,15 @@ app.get("/user/:id", async (req, res) => {
 app.post("/usersignup", async (req, res) => {
     try {
         console.log(req.body);
+        const result = await Userdata.find(req.body)
+        if (result == '') {
         const reactUserdata = new Userdata(req.body);
         const createUser = await reactUserdata.save()
         res.status(201).send({ message: "User is Created" });
+        }
+        else{
+            res.status(201).send({ message: "User is already registred" });
+        }
     }
 
     catch (e) {
@@ -249,10 +255,18 @@ app.get("/getsubject", async (req, res) => {
 app.post("/savesubject", async (req, res) => {
     try {
         console.log(req.body);
-        const new_subject = new Subject(req.body);
-        const subject = await new_subject.save()
-        res.status(201);
-        res.send({ message: "Subject Added Successfully" })
+        const result = await Subject.find()
+        if(result == ''){
+            const new_subject = new Subject(req.body);
+            const subject = await new_subject.save()
+            res.status(201);
+            res.send({ message: "Subject Added Successfully" })
+        }
+        else{
+            res.status(201);
+            res.send({ message: "Subject already added. Please add another Subject" })
+        }
+        
     }
 
     catch (err) {
