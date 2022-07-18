@@ -4,6 +4,7 @@ const Quizdata = require("./models/quiz")
 const Userdata = require("./models/user")
 const Scoredata = require("./models/score")
 const Subject = require("./models/subject")
+const Comment = require("./models/comment")
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -303,6 +304,22 @@ app.put("/updatesubject/:id", async (req, res) => {
         });
         console.log(updateSubject)
         res.status(201).send({ message: "Subject Updated Succesfully" });
+    }
+
+    catch (err) {
+        console.log(err)
+        res.status(400);
+        res.send(err)
+    }
+})
+//comment
+app.post("/addcomment", async (req, res) => {
+    try {
+        console.log(req.body);
+        const comment = new Comment(req.body);
+        const newcomment = await comment.save()
+        res.status(201);
+        res.send({ message: "Thank You for Your Response" })
     }
 
     catch (err) {
