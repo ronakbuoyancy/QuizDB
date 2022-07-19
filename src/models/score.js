@@ -10,7 +10,8 @@ const scoreSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    score: Number,   
+    score: Number,
+    timestamp : Number 
 })
 
 //collection
