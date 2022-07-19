@@ -123,6 +123,25 @@ app.delete("/userdelete/:id", async (req, res) => {
     }
 })
 
+app.post("/forgotpassword", async (req, res) => {
+    try {
+        const result = await Userdata.find(req.body)
+        console.log(result)
+        if (result == '') {
+            res.status(201);
+            res.send({ message: "User not Registered. Please Sign Up" })
+        } else {
+            res.status(201);
+            res.send({ password: result[0].password, message: "Password Sent to You Email Id" })
+        }
+    }
+    catch (err) {
+        console.log(err)
+        res.status(400);
+        res.send(err)
+    }
+})
+
 //quiz api
 app.get("/quiz", async (req, res) => {
     try {
