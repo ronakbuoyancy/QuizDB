@@ -11,13 +11,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    type: {
-        type: String,
-        required: true
-    },
     // username:String,
     // password:String,
-    // type:String,
+    type:String,
     level:String,
     name:String,
     profilepic:String,
