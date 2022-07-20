@@ -132,7 +132,7 @@ app.post("/forgotpassword", async (req, res) => {
             res.send({ message: "User not Registered. Please Sign Up" })
         } else {
             res.status(201);
-            res.send({ password: result[0].password, message: "Password Sent to You Email Id" })
+            res.send({ password: result[0].password, message: "Password Sent to Your Email Id" })
         }
     }
     catch (err) {
