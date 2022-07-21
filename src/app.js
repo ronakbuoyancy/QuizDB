@@ -40,7 +40,7 @@ app.post("/userlogin", async (req, res) => {
             res.send({ message: "Login Failed" })
         } else {
             res.status(201);
-            res.send({ token: result[0]._id, message: "Login Success" })
+            res.send({ token: result[0]._id, type: result[0].type, message: "Login Success" })
         }
     }
     catch (err) {
