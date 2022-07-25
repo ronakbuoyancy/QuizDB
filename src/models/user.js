@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     name:String,
     profilepic:String,
     profession:String,
-    skill:String, 
+    skill:Array, 
 })
 
 //collection
